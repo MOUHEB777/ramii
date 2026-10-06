@@ -1,0 +1,21 @@
+{
+  "name": "rami51",
+  "version": "1.0.0",
+  "description": "RAMI 51 — jeu de cartes tunisien en ligne (rooms + bots + WebSocket)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/engine.test.js",
+    "test:srv": "node tests/sim.js",
+    "test:ui": "node tests/ui.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

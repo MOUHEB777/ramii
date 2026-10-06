@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>🃏 RAMI 51 — لعبة الورق التونسية</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🃏</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= HOME ================= -->
+<section id="home" class="screen">
+  <div class="homecard">
+    <div class="logo">
+      <div class="logoemoji">🃏</div>
+      <h1>RAMI <span class="neon">51</span></h1>
+      <p class="tag">لعبة الورق التونسية — أونلاين مع أصحابك</p>
+    </div>
+
+    <label class="field">
+      <span>اسمك</span>
+      <input id="nameInput" maxlength="14" placeholder="مثلا: Tounsi_9wi">
+    </label>
+
+    <div class="field">
+      <span>أفاتارك</span>
+      <div id="avatarPick" class="avatars"></div>
+    </div>
+
+    <div class="hbtns">
+      <button id="quickBtn" class="btn big grad1">🎮 لعبة سريعة مع البوتات</button>
+      <button id="createBtn" class="btn big grad2">🏠 افتح روم</button>
+    </div>
+    <div class="joinrow">
+      <input id="codeInput" maxlength="4" placeholder="CODE" class="codeinput">
+      <button id="joinBtn" class="btn grad3">🔑 ادخل</button>
+    </div>
+    <p class="hintline">افتح روم، ابعث الكود لأصحابك، ويلعبو معاك فيسع فيس.</p>
+    <button id="rulesBtn" class="linkbtn">📜 كيفاش نلعبو؟</button>
+  </div>
+  <div class="floaty f1">♠</div><div class="floaty f2">♥</div><div class="floaty f3">♦</div><div class="floaty f4">♣</div>
+</section>
+
+<!-- ================= GAME ================= -->
+<section id="game" class="screen hidden">
+
+  <!-- table 3a9liya : wood + felt -->
+  <div class="room">
+    <div class="felt" id="felt">
+      <div class="felt-sheen"></div>
+
+      <!-- blayes el joueurs -->
+      <div class="seats" id="seats"></div>
+
+      <!-- el wast : signboard + dour + progress -->
+      <div class="centerpiece">
+        <div class="cprow">
+          <div class="sboard">
+            <span class="squig">≈</span>
+            <span class="sbname">JBOUD</span>
+            <span class="sbval" id="sbVal">51</span>
+          </div>
+          <div class="turnclock" id="turnClock" title="الوقت mta3 el dour">
+            <svg viewBox="0 0 44 44"><circle class="tc-bg" cx="22" cy="22" r="19"/><circle class="tc-fg" id="tcFg" cx="22" cy="22" r="19"/></svg>
+            <span id="clockVal">24</span>
+          </div>
+        </div>
+        <div class="turnline" id="turnLine"><span class="tdot"></span><span id="turnTxt">...</span></div>
+        <div class="progressline" id="progressLine">HBOUT JDID <b id="progVal">0/51</b></div>
+      </div>
+
+      <!-- el pile mta3 el pioche -->
+      <div class="pilebox pile-stock" id="stockBox" title="اسحب من البوك">
+        <div class="pile stock" id="stock"></div>
+        <div class="pillabel">البوك <b id="stockCount">0</b></div>
+      </div>
+
+      <!-- el défausse -->
+      <div class="pilebox pile-disc" id="discardBox" title="اسحب من الديفوس">
+        <div class="pile discard" id="discard"></div>
+        <div class="pillabel">الديفوس <b id="discardCount">0</b></div>
+      </div>
+
+      <!-- el combinaisons 3al table -->
+      <div class="feltmelds" id="melds"></div>
+
+      <!-- el name tag mte3i -->
+      <div class="nametag" id="nameTag">
+        <span class="ntav" id="ntAv">🙂</span>
+        <span class="ntname" id="ntName">...</span>
+        <span class="ntscore" id="ntScore">0</span>
+      </div>
+
+      <!-- info sghira : code / ronda / target -->
+      <div class="infostrip">
+        <div class="chip" id="roundChip">روندا 1</div>
+        <div class="chip codechip"><span id="roomCode">----</span><button id="copyBtn" title="نسخ الكود">📋</button></div>
+        <div class="chip" id="targetChip">🎯 500</div>
+        <button class="chip chipbtn" id="spectateChip" style="display:none">👀 متفرج</button>
+      </div>
+    </div>
+
+    <!-- score sheet (paper) -->
+    <aside class="scorepanel" id="scorePanel">
+      <div class="sphead"><span class="sptitle">SCORES</span><button id="scoreMin" title="صغّر">–</button></div>
+      <div id="scoreList"></div>
+      <div class="spsub" id="spSub"></div>
+    </aside>
+    <button class="scoretab" id="scoreTab">📋 SCORES</button>
+
+    <!-- el yed + el actions -->
+    <div class="bottom">
+      <div class="handbar">
+        <div class="hand" id="hand"></div>
+      </div>
+      <div class="bottombar">
+        <div class="statusline" id="statusLine">...</div>
+        <div class="sortbar" id="sortBar" title="رتّب ورقك كيفما تحب">
+          <span class="lbl">رتّب:</span>
+          <button data-sort="suit" title="بالشكل">♠</button>
+          <button data-sort="num" title="بالرقم">#</button>
+          <button data-sort="manual" title="بيدك: اسحب الورقة ✋">✋</button>
+        </div>
+      </div>
+      <div class="actions" id="actions"></div>
+    </div>
+
+    <!-- el command bar (kima el reference) -->
+    <div class="cmdbar">
+      <button id="chatBtn" class="cbtn" title="الشات">💬<i class="dot-badge" id="chatDot"></i></button>
+      <button id="soundBtn" class="cbtn" title="الصوت">🔊</button>
+      <button id="themeBtn" class="cbtn" title="شكل الورق">🎨</button>
+      <button id="rulesBtn2" class="cbtn" title="القواعد">📜</button>
+      <button id="fsBtn" class="cbtn" title="شاشة كاملة">⛶</button>
+      <button id="leaveBtn" class="cbtn leave" title="خروج">🚪 اخرج</button>
+    </div>
+
+    <!-- side panel : journal + chat -->
+    <aside class="side-panel" id="sidePanel">
+      <div class="tabs">
+        <button class="tab active" data-tab="journal">📣 الأخبار</button>
+        <button class="tab" data-tab="chat">💬 الشات</button>
+        <button class="tabclose" id="panelClose">✖</button>
+      </div>
+      <div id="journal" class="feed"></div>
+      <div id="chatFeed" class="feed hidden"></div>
+      <div class="chatrow hidden" id="chatRow">
+        <input id="chatInput" maxlength="140" placeholder="اكتب رسالة...">
+        <button id="chatSend" class="btn small">➤</button>
+      </div>
+      <div class="emojis" id="quickEmojis"></div>
+    </aside>
+
+    <div id="toast" class="toast"></div>
+    <canvas id="fx"></canvas>
+  </div>
+</section>
+
+<!-- ================= MODALS ================= -->
+<div id="modal" class="modal hidden">
+  <div class="modalbox" id="modalBox"></div>
+</div>
+
+<div id="rules" class="modal hidden">
+  <div class="modalbox rulesbox">
+    <h2>📜 قواعد الرامي 51</h2>
+    <ul class="rules">
+      <li><b>الهدف:</b> تتخلّص من ورقك كامل. اللي يفضّي يدّو ياخذ 0 نقطة، والباقي يحسبو قيمة الورق اللي في يدّهم. أول واحد يوصل <b id="rTarget">500</b> نقطة يخسر (أقل مجموع يربح).</li>
+      <li><b>البوك:</b> كل لاعب ياخذ 14 ورقة + ورقة واحدة على الديفوس.</li>
+      <li><b>الدور:</b> تاخذ ورقة (من البوك ولا من الديفوس) وبعدها تنزّل كومبيناسيون ولا تطرد ورقة. لازم تطرد ورقة باش تكمل دورك!</li>
+      <li><b>كومبيناسيون = 3 ورقات على الأقل:</b>
+        <br>• <b>كولور (Set):</b> نفس الرقم، أشكال مختلفة — مثلا K♠ K♥ K♦ (أقصى 4).
+        <br>• <b>سويت (Run):</b> 3 ورقات ولا أكثر نفس الشكل ومتتاليين — مثلا 5♥6♥7♥. الآس يمشي قبل الـ2 (A-2-3) ولا بعد الملك (Q-K-A).</li>
+      <li><b>الجوكر:</b> يعوّض أي ورقة (2 جوكر أقصى في الكومبيناسيون). الجوكر في اليد = 15 نقطة!</li>
+      <li><b>الحلّ:</b> باش تنزّل أول كومبيناسيون لازم <b id="rOpen">51</b> نقطة في نفس الدور. الجوكر يحسب بقيمة الورقة اللي عوّضها.</li>
+      <li><b>الطرد:</b> ورقة الكولور (Set) = قيمة رقمها. ورقة السويت = قيمة الأكبر (الملك 10، الأس 1 ولا 11). الجوكر = 15.</li>
+      <li><b>بعد الحلّ:</b> تنجّم تزيد ورق على كومبيناسيونات الطاولة (حتى متاع أصحابك)، أما ما تنجّمش تاخذ منها.</li>
+      <li><b>ترتيب ورقك:</b> كليكي <b>✋</b> من تحت ولا mel شريط «رتّب» و اسحب الورقة فين تحب (بالماوس تنجّم تسحب مباشرة).</li>
+    </ul>
+    <button class="btn grad2" onclick="document.getElementById('rules').classList.add('hidden')">فهمت 👌</button>
+  </div>
+</div>
+
+<script src="/engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🃏 RAMI 51 — أشكال الورق</title>
+<style>
+:root{
+  --bg1:#0b0a1f; --bg2:#1a1140; --bg3:#2b1259;
+  --panel:rgba(255,255,255,.07);
+  --panel-2:rgba(255,255,255,.12);
+  --line:rgba(255,255,255,.14);
+  --txt:#f3f1ff; --dim:#b0a9d6;
+  --cyan:#2ff3e0; --pink:#ff3d9a; --yellow:#ffd93d; --lime:#a8ff60; --orange:#ff9f1c;
+  --red:#ff4757;
+  --cardw:64px; --cardh:92px;
+  --r:16px;
+}
+
+*{box-sizing:border-box}
+body{margin:0;padding:26px 18px 60px;font-family:"Segoe UI",Tahoma,system-ui,"Noto Naskh Arabic",sans-serif;
+  color:#f3f1ff;background:#0b0a1f;
+  background-image:radial-gradient(1200px 700px at 12% -10%, #45108a 0%, transparent 60%),
+    radial-gradient(900px 600px at 110% 20%, #0a5d6b 0%, transparent 55%),
+    linear-gradient(160deg,#0b0a1f 0%,#160c37 55%,#0b0a1f 100%);
+  min-height:100vh}
+h1{text-align:center;margin:6px 0 4px;font-size:30px;letter-spacing:1px}
+h1 .neon{color:#2ff3e0;text-shadow:0 0 12px rgba(47,243,224,.8)}
+.sub{text-align:center;color:#b0a9d6;font-size:13.5px;margin-bottom:26px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:18px;max-width:1300px;margin:0 auto}
+.panel{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:16px 16px 20px}
+.ptitle{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+.ptitle b{font-size:17px}
+.ptitle span{font-size:12px;color:#b0a9d6}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;margin-top:14px}
+.row .card{width:62px;height:90px}
+.row.labels .card{width:38px;height:54px}
+.note{font-size:11.5px;color:#b0a9d6;margin-top:10px;text-align:center}
+.badge{display:inline-block;font-size:11px;padding:3px 9px;border-radius:999px;background:rgba(47,243,224,.16);color:#2ff3e0}
+.hero{max-width:1300px;margin:0 auto 22px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:14px 18px;font-size:13.5px;line-height:1.9;color:#cfc9ea}
+.hero b{color:#ffd93d}
+
+/* ---------------- cards ---------------- */
+.card{
+  width:var(--cardw); height:var(--cardh); border-radius:11px; position:relative; overflow:hidden;
+  background:linear-gradient(168deg,#ffffff,#f6f1e7 62%,#eae2d3);
+  box-shadow:0 8px 18px rgba(0,0,0,.45), 0 2px 0 rgba(0,0,0,.22), inset 0 0 0 1px rgba(0,0,0,.14);
+  flex:0 0 auto; user-select:none; -webkit-user-select:none; touch-action:manipulation;
+  transition:transform .15s cubic-bezier(.2,1.4,.4,1), box-shadow .15s;
+}
+.card .corner{position:absolute; display:flex; flex-direction:column; align-items:center; font-weight:900; line-height:1; font-size:12.5px; letter-spacing:-.5px}
+.card .corner span:last-child{font-size:11px; margin-top:1px}
+.card .corner.tl{top:4px; left:5px}
+.card .corner.br{bottom:4px; right:5px; transform:rotate(180deg)}
+.card .pip{position:absolute; inset:0; display:grid; place-items:center; font-size:34px; opacity:.92}
+.card .gloss{position:absolute; inset:0; background:linear-gradient(118deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,0) 44%); pointer-events:none}
+.card.red{color:#d81e3f}
+.card.black{color:#1b1b2a}
+.card.joker{background:linear-gradient(150deg,#ffe9a8,#ffb347 42%,#ff5fa2); color:#3a1c00}
+.card.joker .jk{position:absolute; inset:0; display:grid; place-items:center; font-size:30px; filter:drop-shadow(0 2px 3px rgba(0,0,0,.25))}
+.card.joker .jkt{position:absolute; bottom:7px; left:0; right:0; text-align:center; font-size:9px; font-weight:900; letter-spacing:1.5px}
+.card.back{background:linear-gradient(150deg,#4b32ad,#1b1150 72%); box-shadow:0 7px 16px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,255,255,.2)}
+.card.back::before{content:""; position:absolute; inset:5px; border-radius:7px; border:1px dashed rgba(255,255,255,.22)}
+.card.back::after{content:"51"; position:absolute; inset:0; display:grid; place-items:center; font-weight:900; font-size:17px; color:rgba(255,217,61,.8); letter-spacing:1px}
+.card.sel{transform:translateY(-16px); box-shadow:0 16px 30px rgba(0,0,0,.5), 0 0 0 3px var(--cyan), 0 0 22px rgba(47,243,224,.4)}
+.card.clickable{cursor:pointer}
+.card.grabbable{cursor:grab}
+.card.pop{animation:pop .35s cubic-bezier(.2,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.4) rotate(-12deg); opacity:0}100%{transform:scale(1); opacity:1}}
+.card.slam{animation:slam .3s cubic-bezier(.2,1.7,.4,1)}
+@keyframes slam{0%{transform:translateY(-40px) scale(1.3) rotate(10deg)}100%{transform:none}}
+/* --- sa7b el wara9 (drag & drop) --- */
+.card.lifting{z-index:40 !important; cursor:grabbing; transition:none !important;
+  transform:translateY(-20px) scale(1.1) !important;
+  box-shadow:0 24px 44px rgba(0,0,0,.62), 0 0 0 3px var(--yellow), 0 0 28px rgba(255,217,61,.45) !important}
+.hand.issorting .card:not(.lifting){opacity:.82}
+.hand.issorting{gap:11px}
+
+/* ---------------- my area ---------------- */
+.mine{border-top:1px solid var(--line); background:rgba(0,0,0,.3); padding:8px 12px 12px; display:flex; flex-direction:column; gap:8px; backdrop-filter:blur(8px)}
+.mineinfo{display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+.me{display:flex; align-items:center; gap:8px; font-weight:800; font-size:14px}
+.me .pav{width:34px;height:34px;font-size:20px}
+.statusline{font-size:13px; color:var(--dim); flex:1; min-width:180px}
+.statusline.ok{color:var(--lime)} .statusline.bad{color:var(--red)}
+.hand{display:flex; gap:7px; overflow-x:auto; overflow-y:hidden; padding:20px 4px 6px; min-height:calc(var(--cardh) + 26px); align-items:flex-end}
+.actions{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+
+/* ---------------- side panel ---------------- */
+.side-panel{display:flex; flex-direction:column; gap:8px}
+.tabs{display:flex; gap:6px}
+.tab{flex:1; padding:8px; border-radius:10px; background:rgba(0,0,0,.25); font-size:13px; font-weight:700; border:1px solid transparent}
+.tab.active{background:var(--panel-2); border-color:var(--line)}
+.feed{flex:1; overflow:auto; display:flex; flex-direction:column; gap:6px; min-height:120px}
+.logline{font-size:12.5px; padding:7px 9px; border-radius:10px; background:rgba(0,0,0,.25); line-height:1.5; border-inline-start:3px solid var(--line)}
+.logline.open{border-color:var(--lime); background:rgba(168,255,96,.09)}
+.logline.win{border-color:var(--yellow); background:rgba(255,217,61,.09)}
+.logline.play{border-color:var(--cyan)}
+.chatmsg{font-size:13px; background:rgba(0,0,0,.25); padding:7px 10px; border-radius:10px; line-height:1.5}
+.chatmsg b{color:var(--cyan)}
+.chatrow{display:flex; gap:6px}
+.chatrow input{flex:1; padding:9px 12px; font-size:14px}
+.emojis{display:flex; gap:4px; flex-wrap:wrap}
+.emojis button{background:rgba(0,0,0,.25); border-radius:9px; font-size:16px; padding:3px 6px; border:1px solid var(--line)}
+.emojis button:hover{background:var(--panel-2)}
+
+/* ---------------- modal ---------------- */
+.modal{position:fixed; inset:0; background:rgba(4,2,16,.72); backdrop-filter:blur(5px); display:grid; place-items:center; z-index:50; padding:16px}
+.modalbox{
+  width:min(560px,100%); max-height:88vh; overflow:auto;
+  background:linear-gradient(180deg,#221352,#150b34); border:1px solid var(--line);
+  border-radius:22px; padding:22px; box-shadow:0 30px 90px rgba(0,0,0,.7);
+  animation:pop .3s cubic-bezier(.2,1.5,.4,1);
+}
+.modalbox h2{margin:0 0 14px; font-size:24px; text-align:center}
+.modalbox p{line-height:1.8; color:var(--dim)}
+.rulesbox{width:min(680px,100%)}
+.rules{line-height:2; padding-inline-start:18px; font-size:14.5px}
+.rules li{margin-bottom:8px}
+.lobbyrow{display:flex; align-items:center; gap:10px; background:rgba(0,0,0,.25); padding:10px; border-radius:14px; margin-bottom:8px}
+.lobbyrow .pav{width:44px;height:44px;font-size:26px}
+.settings{display:flex; gap:10px; flex-wrap:wrap; margin:14px 0}
+.setting{flex:1; min-width:150px; background:rgba(0,0,0,.25); padding:10px; border-radius:14px}
+.setting label{display:block; font-size:12px; color:var(--dim); margin-bottom:6px}
+.setting select{width:100%; padding:9px; border-radius:10px; background:#1b1150; color:var(--txt); border:1px solid var(--line); font-family:inherit; font-size:14px}
+.invitebox{display:flex; gap:8px; margin-top:12px}
+.invitebox input{flex:1; font-size:13px; direction:ltr}
+.scoretable{width:100%; border-collapse:collapse; margin:10px 0}
+.scoretable th,.scoretable td{padding:9px; text-align:center; border-bottom:1px solid var(--line); font-size:14px}
+.scoretable th{color:var(--dim); font-size:12px}
+.scoretable tr.win td{color:var(--lime); font-weight:900}
+.minicards{display:flex; gap:2px; flex-wrap:wrap; justify-content:center}
+.minicards .card{width:30px;height:43px;border-radius:5px}
+.minicards .card .pip{font-size:15px}
+.minicards .card .corner{font-size:7px}
+.waitpulse{text-align:center; color:var(--dim); font-size:13.5px; animation:blink 1.4s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.45}}
+
+/* ---------------- toast + fx ---------------- */
+.toast{position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(80px); background:linear-gradient(100deg,#ff4757,#ff9f1c); padding:13px 22px; border-radius:14px; font-weight:800; opacity:0; transition:.3s; z-index:99; box-shadow:0 14px 40px rgba(0,0,0,.5); pointer-events:none; max-width:90vw; text-align:center}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+.toast.info{background:linear-gradient(100deg,#2ff3e0,#3b82f6); color:#04121a}
+#fx{position:fixed; inset:0; pointer-events:none; z-index:98}
+
+/* ---------------- responsive ---------------- */
+@media (max-width:1080px){
+  :root{--cardw:56px; --cardh:80px}
+  .board{grid-template-columns:200px 1fr 240px}
+}
+@media (max-width:900px){
+  .board{grid-template-columns:1fr; grid-template-rows:auto 1fr; overflow:auto}
+  .players-panel{order:0; display:flex; gap:8px; overflow-x:auto; padding:8px}
+  .players-panel .ptitle{display:none}
+  #players{display:flex; gap:8px}
+  .prow{margin:0; min-width:186px}
+  .side-panel{position:fixed; top:64px; bottom:0; right:0; width:min(320px,86vw); background:#150b34; z-index:40; transform:translateX(105%); transition:.25s; border-radius:16px 0 0 0}
+  .side-panel.open{transform:none; box-shadow:-20px 0 60px rgba(0,0,0,.6)}
+  .hide-sm{display:none}
+  .pile.discard .card{position:absolute}
+  .brand{font-size:17px}
+  .melds{min-height:120px}
+}
+@media (max-width:560px){
+  :root{--cardw:50px; --cardh:72px}
+  .topbar{padding:8px 10px; gap:8px}
+  .iconbtn{width:38px;height:38px;font-size:16px}
+  .chip{padding:6px 9px; font-size:12px}
+  .meldrow .card{width:40px;height:58px}
+  .statusline{font-size:12px}
+}
+
+/* ============================================================
+   THEMES mta3 el wara9  (data-theme 3al body wala 3al preview)
+   ============================================================ */
+
+/* 0) CLASSIC — (default : elli fo9) */
+[data-theme="classic"] .card{background:linear-gradient(168deg,#ffffff,#f6f1e7 62%,#eae2d3)}
+[data-theme="classic"] .card.red{color:#d81e3f}
+[data-theme="classic"] .card.black{color:#1b1b2a}
+
+/* 1) NEON */
+[data-theme="neon"] .card{background:linear-gradient(165deg,#181d47,#080a1a 68%);
+  box-shadow:0 0 0 1px rgba(120,220,255,.4), 0 0 16px rgba(47,243,224,.22), 0 9px 20px rgba(0,0,0,.55)}
+[data-theme="neon"] .card .gloss{background:linear-gradient(118deg,rgba(120,220,255,.18),transparent 46%)}
+[data-theme="neon"] .card.red{color:#ff5c9d; text-shadow:0 0 9px rgba(255,92,157,.8)}
+[data-theme="neon"] .card.black{color:#4de3ff; text-shadow:0 0 9px rgba(77,227,255,.75)}
+[data-theme="neon"] .card .pip{font-size:36px; opacity:1}
+[data-theme="neon"] .card .corner{background:rgba(0,0,0,.4); border-radius:6px; padding:2px 3px; font-size:11.5px}
+[data-theme="neon"] .card.joker{background:linear-gradient(150deg,#2a2258,#0e0c24); color:#fff}
+[data-theme="neon"] .card.joker .jkt{color:var(--cyan); text-shadow:0 0 9px rgba(47,243,224,.85)}
+[data-theme="neon"] .card.back{background:linear-gradient(150deg,#0f2c4d,#080a1a); box-shadow:0 0 0 1px rgba(77,227,255,.4), 0 0 15px rgba(47,243,224,.2)}
+[data-theme="neon"] .card.back::after{color:var(--cyan); text-shadow:0 0 10px rgba(47,243,224,.8)}
+
+/* 2) ROYAL (dhebi) */
+[data-theme="royal"] .card{background:linear-gradient(170deg,#fffdf7,#f7eed6 62%,#eddfba);
+  box-shadow:0 9px 20px rgba(0,0,0,.45), inset 0 0 0 2px #d7b455, inset 0 0 0 4px rgba(255,255,255,.75), inset 0 0 0 6px rgba(178,137,52,.35)}
+[data-theme="royal"] .card .gloss{background:linear-gradient(118deg,rgba(255,255,255,.65),rgba(255,255,255,0) 40%)}
+[data-theme="royal"] .card .corner{font-family:Georgia,"Times New Roman",serif; font-size:13px}
+[data-theme="royal"] .card.red{color:#98172c}
+[data-theme="royal"] .card.black{color:#241f18}
+[data-theme="royal"] .card .pip{font-size:33px; opacity:1; text-shadow:0 2px 3px rgba(0,0,0,.22)}
+[data-theme="royal"] .card .pip::before{content:""; position:absolute; width:46px; height:46px; border-radius:50%;
+  background:radial-gradient(circle,rgba(215,180,85,.3),rgba(215,180,85,0) 72%)}
+[data-theme="royal"] .card.joker{background:linear-gradient(150deg,#fff6d9,#f2d891 45%,#d9b45c); color:#4a3405}
+[data-theme="royal"] .card.joker .jkt{color:#6b4c08}
+[data-theme="royal"] .card.back{background:linear-gradient(150deg,#5c3f92,#2a1a4d);
+  box-shadow:0 8px 18px rgba(0,0,0,.5), inset 0 0 0 2px #d7b455, inset 0 0 0 5px rgba(255,255,255,.12)}
+[data-theme="royal"] .card.back::after{color:#f0d68b}
+
+/* 3) MODERN (3asri) */
+[data-theme="modern"] .card{background:#fff; border-radius:15px; box-shadow:0 12px 26px rgba(10,6,30,.5)}
+[data-theme="modern"] .card .gloss{background:linear-gradient(118deg,rgba(255,255,255,.4),rgba(255,255,255,0) 38%)}
+[data-theme="modern"] .card.red{color:#e8384f}
+[data-theme="modern"] .card.black{color:#232936}
+[data-theme="modern"] .card .corner{font-size:13.5px; font-weight:800}
+[data-theme="modern"] .card .corner span:last-child{font-size:12px}
+[data-theme="modern"] .card .pip{font-size:40px; opacity:1}
+[data-theme="modern"] .card .pip::before{content:""; position:absolute; width:48px; height:48px; border-radius:50%; background:currentColor; opacity:.11}
+[data-theme="modern"] .card.joker{background:#fff; color:#e8384f}
+[data-theme="modern"] .card.joker .jk{font-size:34px}
+[data-theme="modern"] .card.joker .jkt{color:#ff7a29; letter-spacing:2px}
+[data-theme="modern"] .card.back{background:linear-gradient(150deg,#3b3f6b,#1b1e33); box-shadow:0 12px 26px rgba(10,6,30,.55)}
+[data-theme="modern"] .card.back::after{color:#fff; opacity:.9}
+
+/* ---------------- sort bar mta3 el wara9 ---------------- */
+.sortbar{display:flex; gap:4px; align-items:center; background:rgba(0,0,0,.28); border:1px solid var(--line); border-radius:13px; padding:3px 5px}
+.sortbar .lbl{font-size:11px; color:var(--dim); font-weight:700; padding-inline-end:2px}
+.sortbar button{background:none; border-radius:9px; padding:5px 9px; font-size:13px; font-weight:900; color:var(--dim); line-height:1}
+.sortbar button:hover{background:rgba(255,255,255,.1); color:var(--txt)}
+.sortbar button.act{background:linear-gradient(100deg,#2ff3e0,#3b82f6); color:#04121a; box-shadow:0 3px 12px rgba(47,243,224,.35)}
+
+/* ---------------- theme picker ---------------- */
+.themes{display:flex; flex-direction:column; gap:9px}
+.themerow{display:flex; align-items:center; gap:12px; padding:9px 11px; border-radius:15px; background:rgba(0,0,0,.28); border:1.5px solid var(--line); cursor:pointer; transition:.15s}
+.themerow:hover{border-color:var(--cyan); transform:translateY(-1px)}
+.themerow.act{border-color:var(--cyan); box-shadow:0 0 0 2px rgba(47,243,224,.22)}
+.themerow .thname{font-weight:900; font-size:14.5px}
+.themerow .thdesc{font-size:11.5px; color:var(--dim); margin-top:2px}
+.themerow .thcards{display:flex; gap:3px}
+.themerow .card{width:38px; height:54px; border-radius:8px}
+.themerow .card .pip{font-size:17px}
+.themerow .card .corner{font-size:8px}
+.themerow .card .corner span:last-child{font-size:7px}
+.themerow .card .jkt{font-size:5px; bottom:3px}
+
+</style>
+</head>
+<body>
+<h1>🃏 RAMI <span class="neon">51</span> — <span style="font-size:22px">أشكال الورق</span></h1>
+<div class="sub">4 أشكال جديدة — تختار اللي يعجبك mel 🎨 fi اللعبة، و يتسجّل ليك</div>
+<div class="hero">
+  <b>كيفاش تبدّل الشكل؟</b> ادخل اللعبة ← كليكي 3al <b>🎨</b> فوق (جنب الصوت) ← اختار الشكل. El choix yeb9a msejjel f téléphone/PC mte3ek.
+  <br><b>و ترتيب الورق بيدك:</b> fi شريط <b>«رتّب: شكل · رقم · ✋ بيدي»</b> تحت يدّك — كليكي <b>✋ بيدي</b> وبعد اسحب الورقة و حطّها فين تحب (بالماوس تنجّم تسحب مباشرة). ب <b>رقم</b> ولا <b>شكل</b> يرتّب أوتوماتيك.
+</div>
+<div class="grid">
+  <div class="panel" data-theme="classic">
+    <div class="ptitle"><b>🂡 كلاسيكي</b><span class="badge">classic</span></div>
+    <div class="row labels" data-theme="classic">
+      <div class="card black"><div class="corner tl"><span>A</span><span>♠</span></div><div class="pip">♠</div><div class="corner br"><span>A</span><span>♠</span></div><div class="gloss"></div></div><div class="card red"><div class="corner tl"><span>K</span><span>♥</span></div><div class="pip">♥</div><div class="corner br"><span>K</span><span>♥</span></div><div class="gloss"></div></div><div class="card joker"><div class="jk">🃏</div><div class="jkt">JOKER</div><div class="gloss"></div></div>
+    </div>
+    <div class="row" data-theme="classic"><div class="card black"><div class="corner tl"><span>A</span><span>♠</span></div><div class="pip">♠</div><div class="corner br"><span>A</span><span>♠</span></div><div class="gloss"></div></div><div class="card red"><div class="corner tl"><span>K</span><span>♥</span></div><div class="pip">♥</div><div class="corner br"><span>K</span><span>♥</span></div><div class="gloss"></div></div><div class="card red"><div class="corner tl"><span>7</span><span>♦</span></div><div class="pip">♦</div><div class="corner br"><span>7</span><span>♦</span></div><div class="gloss"></div></div><div class="card black"><div class="corner tl"><span>Q</span><span>♣</span></div><div class="pip">♣</div><div class="corner br"><span>Q</span><span>♣</span></div><div class="gloss"></div></div><div class="card black"><div class="corner tl"><span>10</span><span>♠</span></div><div class="pip">♠</div><div class="corner br"><span>10</span><span>♠</span></div><div class="gloss"></div></div><div class="card joker"><div class="jk">🃏</div><div class="jkt">JOKER</div><div class="gloss"></div></div><div class="card back"></div></div>
+    <div class="note">↑ هذي carte مta3 يدّك — و تحتها ورق الطاولة و ظهر الكارطة</div>
+  </div>
+  <div class="panel" data-theme="neon">
+    <div class="ptitle"><b>🌌 نيون</b><span class="badge">neon</span></div>
+    <div class="row labels" data-theme="neon">
+      <div class="card black"><div class="corner tl"><span>A</span><span>♠</span></div><div class="pip">♠</div><div class="corner br"><span>A</span><span>♠</span></div><div class="gloss"></div></div><div class="card red"><div class="corner tl"><span>K</span><span>♥</span></div><div class="pip">♥</div><div class="corner br"><span>K</span><span>♥</span></div><div class="gloss"></div></div><div class="card joker"><div class="jk">🃏</div><div class="jkt">JOKER</div><div class="gloss"></div></div>
+    </div>
+    <div class="row" data-theme="neon"><div class="card black"><div class="corner tl"><span>A</span><span>♠</span></div><div class="pip">♠</div><div class="corner br"><span>A</span><span>♠</span></div><div class="gloss"></div></div><div class="card red"><div class="corner tl"><span>K</span><span>♥</span></div><div class="pip">♥</div><div class="corner br"><span>K</span><span>♥</span></div><div class="gloss"></div></div><div class="card red"><div class="corner tl"><span>7</span><span>♦</span></div><div class="pip">♦</div><div class="corner br"><span>7</span><span>♦</span></div><div class="gloss"></div></div><div class="card black"><div class="corner tl"><span>Q</span><span>♣</span></div><div class="pip">♣</div><div class="corner br"><span>Q</span><span>♣</span></div><div class="gloss"></div></div><div class="card black"><div class="corner tl"><span>10</span><span>♠</span></div><div class="pip">♠</div><div class="corner br"><span>10</span><span>♠</span></div><div class="gloss"></div></div><div class="card joker"><div class="jk">🃏</div><div class="jkt">JOKER</div><div class="gloss"></div></div><div class="card back"></div></div>
+    <div class="note">↑ هذي carte مta3 يدّك — و تحتها ورق الطاولة و ظهر الكارطة</div>
+  </div>
+  <div class="panel" data-theme="royal">
+    <div class="ptitle"><b>👑 رويال</b><span class="badge">royal</span></div>
+    <div class="row labels" data-theme="royal">
+      <div class="card black"><div class="corner tl"><span>A</span><span>♠</span></div><div class="pip">♠</div><div class="corner br"><span>A</span><span>♠</span></div><div class="gloss"></div></div><div class="card red"><div class="corner tl"><span>K</span><span>♥</span></div><div class="pip">♥</div><div class="corner br"><span>K</span><span>♥</span></div><div class="gloss"></div></div><div class="card joker"><div class="jk">🃏</div><div class="jkt">JOKER</div><div class="gloss"></div></div>
+    </div>
+    <div class="row" data-theme="royal"><div class="card black"><div class="corner tl"><span>A</span><span>♠</span></div><div class="pip">♠</div><div class="corner br"><span>A</span><span>♠</span></div><div class="gloss"></div></div><div class="card red"><div class="corner tl"><span>K</span><span>♥</span></div><div class="pip">♥</div><div class="corner br"><span>K</span><span>♥</span></div><div class="gloss"></div></div><div class="card red"><div class="corner tl"><span>7</span><span>♦</span></div><div class="pip">♦</div><div class="corner br"><span>7</span><span>♦</span></div><div class="gloss"></div></div><div class="card black"><div class="corner tl"><span>Q</span><span>♣</span></div><div class="pip">♣</div><div class="corner br"><span>Q</span><span>♣</span></div><div class="gloss"></div></div><div class="card black"><div class="corner tl"><span>10</span><span>♠</span></div><div class="pip">♠</div><div class="corner br"><span>10</span><span>♠</span></div><div class="gloss"></div></div><div class="card joker"><div class="jk">🃏</div><div class="jkt">JOKER</div><div class="gloss"></div></div><div class="card back"></div></div>
+    <div class="note">↑ هذي carte مta3 يدّك — و تحتها ورق الطاولة و ظهر الكارطة</div>
+  </div>
+  <div class="panel" data-theme="modern">
+    <div class="ptitle"><b>🃏 مودرن</b><span class="badge">modern</span></div>
+    <div class="row labels" data-theme="modern">
+      <div class="card black"><div class="corner tl"><span>A</span><span>♠</span></div><div class="pip">♠</div><div class="corner br"><span>A</span><span>♠</span></div><div class="gloss"></div></div><div class="card red"><div class="corner tl"><span>K</span><span>♥</span></div><div class="pip">♥</div><div class="corner br"><span>K</span><span>♥</span></div><div class="gloss"></div></div><div class="card joker"><div class="jk">🃏</div><div class="jkt">JOKER</div><div class="gloss"></div></div>
+    </div>
+    <div class="row" data-theme="modern"><div class="card black"><div class="corner tl"><span>A</span><span>♠</span></div><div class="pip">♠</div><div class="corner br"><span>A</span><span>♠</span></div><div class="gloss"></div></div><div class="card red"><div class="corner tl"><span>K</span><span>♥</span></div><div class="pip">♥</div><div class="corner br"><span>K</span><span>♥</span></div><div class="gloss"></div></div><div class="card red"><div class="corner tl"><span>7</span><span>♦</span></div><div class="pip">♦</div><div class="corner br"><span>7</span><span>♦</span></div><div class="gloss"></div></div><div class="card black"><div class="corner tl"><span>Q</span><span>♣</span></div><div class="pip">♣</div><div class="corner br"><span>Q</span><span>♣</span></div><div class="gloss"></div></div><div class="card black"><div class="corner tl"><span>10</span><span>♠</span></div><div class="pip">♠</div><div class="corner br"><span>10</span><span>♠</span></div><div class="gloss"></div></div><div class="card joker"><div class="jk">🃏</div><div class="jkt">JOKER</div><div class="gloss"></div></div><div class="card back"></div></div>
+    <div class="note">↑ هذي carte مta3 يدّك — و تحتها ورق الطاولة و ظهر الكارطة</div>
+  </div>
+</div>
+</body>
+</html>
